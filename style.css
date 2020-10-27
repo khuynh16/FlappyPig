@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 #game {
     width: 100%;
     height: 100vh;
@@ -17,13 +18,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: lightblue;
 }
 
-#background img {
+#piggyCharacter {
     position: absolute;
     bottom: 20vh;
     left: 30vw;
     height: 10vh;
+    z-index: 100;
 }
 
 #upperObstacle {
@@ -34,7 +37,7 @@
     position: absolute;
     top: 0;
     right: -50px;
-    /* animation: obstacleAnimation 3s linear infinite; */
+    /* animation: obstacleAnimation 3s infinite linear; */
 }
 
 #lowerObstacle {
@@ -45,10 +48,15 @@
     position: absolute;
     right: -50px;
     bottom: 20vh;
+    /* animation: obstacleAnimation 3s infinite linear; */
 }
 
 .animationClass {
     animation: obstacleAnimation 3s linear infinite;
+}
+
+.pauseAnimation {
+    animation-play-state: paused;
 }
 
 @keyframes obstacleAnimation {

@@ -6,7 +6,7 @@ let htmlPage = document.getElementById('html');
 var jumping = 0;                                            // holds jumping action (true or false)
 var counter = 0;
 
-htmlPage.addEventListener('animationiteration', () => {
+upperObstacle.addEventListener('animationiteration', () => {
     let upperObsHeight = Math.floor((Math.random()*61)) + 10;
     let lowerObsHeight = 70 - upperObsHeight;
     // console.log(upperObsHeight);
@@ -15,6 +15,7 @@ htmlPage.addEventListener('animationiteration', () => {
     let lowerRand = Math.floor(Math.random()*lowerObsHeight + 1);
     upperObstacle.style.height = upperRand + 'vh';
     lowerObstacle.style.height = lowerRand + 'vh';
+    counter++;
 });
 
 function startGame() {
@@ -22,7 +23,6 @@ function startGame() {
     upperObstacle.classList.add('animationClass');
     lowerObstacle.classList.add('animationClass');
     startButton.style.display = 'none';
-    let upperObsLeft;
 
     setInterval(function(){
         var piggyTop = parseInt(window.getComputedStyle(piggy).getPropertyValue("top"));
@@ -37,20 +37,22 @@ function startGame() {
         let calculatedVh = value / vh;
 
         if(jumping==0){
-                // stops at bottom; doesn't fall through map
-                if (calculatedVh < 70)
-                    piggy.style.top = (piggyTop+3)+"px";
+            // stops at bottom; doesn't fall through map
+            if (calculatedVh < 70)
+                piggy.style.top = (piggyTop+3)+"px";
         }
-        upperObsLeft = parseInt(window.getComputedStyle(upperObstacle).getPropertyValue('left'));
-        console.log(upperObsLeft);
-        //  var blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
-        // var holeTop = parseInt(window.getComputedStyle(hole).getPropertyValue("top"));
-        // var cTop = -(500-characterTop);
-        // if((characterTop>480)||((blockLeft<20)&&(blockLeft>-50)&&((cTop<holeTop)||(cTop>holeTop+130)))){
-        //     alert("Game over. Score: "+(counter-1));
-        //     character.style.top = 100 + "px";
-        //     counter=0;
-        // }
+
+        var upperBoundary = upperObstacle.getBoundingClientRect();
+        var lowerBoundary = lowerObstacle.getBoundingClientRect();
+        var piggyBoundary = piggy.getBoundingClientRect();
+
+        if (upperBoundary.left > 0 && (upperBoundary.left <= piggyBoundary.right) && (piggyBoundary.top + 20 < upperBoundary.bottom) && (upperBoundary.right > piggyBoundary.left)) {
+            alert('Game over! Hit top obstacle!');
+        }
+
+        if (lowerBoundary.left > 0 && (lowerBoundary.left <= piggyBoundary.right) && (piggyBoundary.bottom > lowerBoundary.top + 16) && (lowerBoundary.right > piggyBoundary.left)) {
+            alert('Game over! Hit bottom obstacle!');
+        }
     },10);
 }
 
