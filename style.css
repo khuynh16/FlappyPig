@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#game {
+    width: 100%;
+    height: 100vh;
+    border: 1px solid black;
+    position: relative;
+    overflow: hidden;
+}
+
+#background {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#background img {
+    position: absolute;
+    bottom: 20vh;
+    left: 30vw;
+    height: 10vh;
+}
+
+#upperObstacle {
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+    background-color: black;
+    position: absolute;
+    top: 0;
+    right: -50px;
+    /* animation: obstacleAnimation 3s linear infinite; */
+}
+
+#lowerObstacle {
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+    background-color: black;
+    position: absolute;
+    right: -50px;
+    bottom: 20vh;
+}
+
+.animationClass {
+    animation: obstacleAnimation 3s linear infinite;
+}
+
+@keyframes obstacleAnimation {
+    0%   {transform: translateX(120px) }
+    100% {transform: translateX(-120vw) }
+}
+
+#floor {
+    background-color: rgb(17, 160, 17);
+    width: 100%;
+    height: 20vh;
+    position: absolute;
+    bottom: 0;
+}
+
+#startButton {
+    width: 100px;
+    height: 50px;
+}
+
+.jumpAnimation {
+    animation: jumpAnimation 500ms linear;
+}
+
+@keyframes jumpAnimation {
+    0% { top: 60vh }
+    30% { top: 50vh }
+    70% { top: 50vh }
+    100% { top: 60vh }
+}
